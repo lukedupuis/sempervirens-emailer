@@ -1,4 +1,5 @@
-import emailer from './src/emailer.class.js';
+import Emailer from './src/emailer.class.js';
+import send from './src/send.js';
 
-export default emailer;
-export { emailer };
+export default Emailer;
+export { Emailer, send };

@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
-import emailer from '../index.js';
+import { Emailer, send } from '../index.js';
 
-describe('1. emailer', () => {
+describe('1. Emailer', () => {
 
   describe('1.1. When "send" is called', () => {
     // return;
@@ -11,7 +11,7 @@ describe('1. emailer', () => {
       // return;
       it('1.1.1.1. Should throw an error', async () => {
         try {
-          await emailer.send({
+          await send({
             name: '',
             from: 'test01@test.com',
             password: 'password',
@@ -23,7 +23,7 @@ describe('1. emailer', () => {
           expect(message).to.include('"name" is required.');
         }
         try {
-          await emailer.send({
+          await send({
             name: 'Test01',
             from: '',
             password: 'password',
@@ -35,7 +35,7 @@ describe('1. emailer', () => {
           expect(message).to.include('"from" is required.');
         }
         try {
-          await emailer.send({
+          await send({
             name: 'Test01',
             from: 'test01@test.com',
             password: '',
@@ -46,7 +46,7 @@ describe('1. emailer', () => {
           expect(message).to.include('"password" is required.');
         }
         try {
-          await emailer.send({
+          await send({
             name: 'Test01',
             from: 'test01@test.com',
             password: 'password',
@@ -57,7 +57,7 @@ describe('1. emailer', () => {
           expect(message).to.include('"to" is required.');
         }
         try {
-          await emailer.send({
+          await send({
             name: 'Test01',
             from: 'test01@test.com',
             password: 'password',
@@ -74,7 +74,7 @@ describe('1. emailer', () => {
       // return;
       it('1.1.2.1. Should throw an error', async () => {
         try {
-          await emailer.send({
+          await send({
             name: 'Test 01',
             from: 'test01@test.com',
             password: 'password',
@@ -91,12 +91,12 @@ describe('1. emailer', () => {
     describe('1.1.3. When credentials are valid', () => {
 
       const from = 'test3793793@gmail.com';
-      const password = '';
+      const password = 'riyphizdytritwyq';
 
       describe('1.1.3.1. When not pre-initialized', () => {
         it('1.1.3.1.1. Should send an email', async () => {
-          return;
-          const { accepted } = await emailer.send({
+          // return;
+          const { accepted } = await Emailer.send({
             name: 'Test 01',
             from,
             password,
@@ -110,8 +110,8 @@ describe('1. emailer', () => {
 
       describe('1.1.3.2. When pre-initialized', () => {
         it('1.1.3.2.1. Should send an email', async () => {
-          return;
-          emailer.init({
+          // return;
+          const emailer = new Emailer({
             name: 'Test 01',
             from,
             password

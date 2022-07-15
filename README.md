@@ -13,7 +13,7 @@ _Note: Currently only supports Gmail and plain text._
 
 1. Setup a Gmail account with an app password.
 
-2. Import `emailer`.
+2. Import `Emailer`.
 
 3. (Optional) Initialize `emailer` with `name`, `from`, and `password` so those parameters may be omitted when calling `send`.
 
@@ -28,7 +28,7 @@ import emailer from '@sempervirens/emailer';
 
   // Without initializing
 
-  const data = await emailer.send({
+  const data1 = await Emailer.send({
     name: 'From name',
     from: 'From email',
     password: 'Gmail app password',
@@ -39,14 +39,14 @@ import emailer from '@sempervirens/emailer';
 
   // With initializing
 
-  emailer.init({
+  const emailer = new Emailer({
     name: 'From name',
     from: 'From email',
     password: 'Gmail app password'
   });
 
   // In a file somewhere else
-  const data = await emailer.send({
+  const data2 = await emailer.send({
     to: 'To email',
     subject: 'Email subject',
     text: 'Email text'
