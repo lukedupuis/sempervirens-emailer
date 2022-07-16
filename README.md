@@ -64,7 +64,7 @@ import emailer from '@sempervirens/emailer';
 
 ### Advanced
 
-<p>In addition to a simplified quick start API, `@sempervirens/emailer` accepts an `options` object and a `defaults` object. These correspond to the <a href="https://nodemailer.com/smtp/" target="_blank">Nodemailer transport options</a>. The Nodemailer options can be passed either directly into the `send` function, or preconfigured on an `Emailer` instance by passing them into the `Emailer` constructor.<p>
+<p>In addition to a simplified quick start API, `@sempervirens/emailer` accepts an `options` object, which correspond to the <a href="https://nodemailer.com/smtp/" target="_blank">Nodemailer transport options</a>. The Nodemailer options can be passed either directly into the `send` function, or preconfigured on an `Emailer` instance by passing them into the `Emailer` constructor.<p>
 
 ```
 const data3 = await Emailer.send({
@@ -91,7 +91,6 @@ const data3 = await Emailer.send({
 | `from` | string | Required if `options` not given. From email. |
 | `password` | string | Required if `options` not given. From email password or app password. |
 | `options` | object | Required if `name`, `from`, `password` not given. Nodemailer options. |
-| `defaults` | object | Optional, only used with `options`. Nodemailer defaults. |
 
 ### send (static or instance)
 
@@ -103,7 +102,6 @@ _Note: If using the static function, `name`, `from`, `password`, etc. are requir
 | `from` | string | Required if static and `options` not given. From email. |
 | `password` | string | Required if static and `options` not given. From email password or app password. |
 | `options` | object | Required if static and `name`, `from`, `password` not given. Nodemailer options. |
-| `defaults` | object | Optional, only used with `options`. Nodemailer defaults. |
 | `to` | string | Required. The to email address. |
 | `subject` | string | Recommended. The email subject.
 | `body` | string | Recommended. HTML or plain text email body.

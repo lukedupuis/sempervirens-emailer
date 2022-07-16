@@ -6,20 +6,17 @@ class Emailer {
   #from;
   #password;
   #options;
-  #defaults;
 
   constructor({
     name,
     from,
     password,
-    options,
-    defaults
+    options
   } = {}) {
     this.#name = name;
     this.#from = from;
     this.#password = password;
     this.#options = options;
-    this.#defaults = defaults;
   }
 
   async send({
@@ -27,7 +24,6 @@ class Emailer {
     from = this.#from,
     password = this.#password,
     options = this.#options,
-    defaults = this.#defaults,
     to = '',
     subject = '',
     body = ''
@@ -37,7 +33,6 @@ class Emailer {
       from,
       password,
       options,
-      defaults,
       to,
       subject,
       body

@@ -10,17 +10,13 @@ const send = async ({
   subject = '',
   to = '',
   body = '',
-  options,
-  defaults
+  options
 }) => {
 
   const transportParams = [];
 
   if (options) {
     transportParams.push(options);
-    if (defaults) {
-      transportParams.push(defaults);
-    }
   } else {
     transportParams.push({
       service: 'gmail',
