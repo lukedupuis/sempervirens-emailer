@@ -1,40 +1,53 @@
 import nodemailer from 'nodemailer';
+import { convert } from 'html-to-text';
+
+import isHtml from './isHtml.js';
 
 const send = async ({
   name = '',
   from = '',
   password = '',
-  to = '',
   subject = '',
-  text = ''
+  to = '',
+  body = '',
+  options,
+  defaults
 }) => {
 
-  if (!name) {
-    throw new Error('"name" is required. It may be set for all requests by calling "init".');
-  } else if (!from) {
-    throw new Error('"from" is required. It may be set for all requests by calling "init".');
-  } else if (!password) {
-    throw new Error('"password" is required. It may be set for all requests by calling "init".');
-  } else if (!to) {
-    throw new Error('"to" is required.');
-  } else if (!text) {
-    throw new Error('"text" is required.');
+  const transportParams = [];
+
+  if (options) {
+    transportParams.push(options);
+    if (defaults) {
+      transportParams.push(defaults);
+    }
+  } else {
+    transportParams.push({
+      service: 'gmail',
+      auth: {
+        user: from,
+        pass: password
+      }
+    });
   }
 
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: from,
-      pass: password
-    }
-  });
+  let text, html;
+  if (isHtml(body)) {
+    text = convert(body);
+    html = body;
+  } else {
+    text = body;
+  }
 
-  const data = await transporter.sendMail({
-    from: `${name} <${from}>`,
-    to,
-    subject,
-    text
-  });
+  const data = await nodemailer
+    .createTransport(...transportParams)
+    .sendMail({
+      from: `${name} <${from}>`,
+      to,
+      subject,
+      text,
+      html
+    });
 
   if (!data.response.includes('250')) {
     throw new Error([
